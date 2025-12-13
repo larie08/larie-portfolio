@@ -1,0 +1,205 @@
+{
+  "name": "Larie Jane Rubi",
+  "title": "UI/UX Designer",
+  "email": "lariejanerubi@gmail.com",
+  "phone": "+63 977-012-8980",
+  "location": "Cebu City, Philippines",
+  "facebook": "https://www.facebook.com/lariejane.rubi",
+  "github": "https://github.com/larie08",
+  "instagram": "https://www.instagram.com/dvrksm/",
+  "bio": "Passionate UI/UX designer with 5+ years of experience creating intuitive and visually stunning digital experiences. Specialized in user research, wireframing, prototyping, and Figma design.",
+  "about": "I'm a UI/UX designer who transforms complex problems into simple, beautiful, and intuitive designs. My approach combines user research, data-driven decision making, and creative problem solving.",
+  "skills": [
+    "UI Design",
+    "Figma",
+    "Prototyping",
+    "Wireframing",
+    "Design Systems"
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-Commerce Mobile App",
+      "category": "Mobile Design",
+      "client": "ShopEasy Inc.",
+      "description": "A seamless shopping experience with intuitive navigation and modern UI. Increased conversion rate by 35%.",
+      "long_description": "Complete redesign of a mobile shopping app focusing on streamlined checkout process and personalized recommendations.",
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+      "figma_link": "https://www.figma.com/file/example1",
+      "live_link": "https://example.com/project1",
+      "tags": ["Mobile", "E-commerce", "iOS", "Android"],
+      "year": "2024",
+      "duration": "3 months",
+      "role": "Lead UI/UX Designer",
+      "deliverables": [
+        "User Research Report",
+        "Wireframes",
+        "High-fidelity Mockups",
+        "Interactive Prototype",
+        "Design System"
+      ],
+      "results": [
+        "35% increase in conversion rate",
+        "50% reduction in cart abandonment",
+        "4.8/5 app store rating"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Banking Dashboard",
+      "category": "Web Design",
+      "client": "FinanceHub",
+      "description": "Clean and professional dashboard for financial management with real-time analytics and intuitive data visualization.",
+      "long_description": "Designed a comprehensive banking dashboard that simplifies complex financial data through clear visualizations.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      "figma_link": "https://www.figma.com/file/example2",
+      "live_link": "https://example.com/project2",
+      "tags": ["Web", "Dashboard", "Finance", "SaaS"],
+      "year": "2024",
+      "duration": "4 months",
+      "role": "Senior UI/UX Designer",
+      "deliverables": [
+        "User Personas",
+        "User Journey Maps",
+        "Wireframes",
+        "UI Components Library"
+      ],
+      "results": [
+        "40% increase in user engagement",
+        "60% faster task completion",
+        "95% user satisfaction score"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Fitness Tracking App",
+      "category": "Mobile Design",
+      "client": "FitLife",
+      "description": "Motivating users to achieve their fitness goals with gamification and personalized workout plans.",
+      "long_description": "Created an engaging fitness tracking app combining health monitoring with social motivation.",
+      "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop",
+      "figma_link": "https://www.figma.com/file/example3",
+      "live_link": "https://example.com/project3",
+      "tags": ["Mobile", "Health", "Gamification", "Social"],
+      "year": "2023",
+      "duration": "5 months",
+      "role": "Lead Product Designer",
+      "deliverables": [
+        "Market Research",
+        "Competitive Analysis",
+        "User Flows",
+        "Prototypes"
+      ],
+      "results": [
+        "100K+ downloads in first month",
+        "4.7/5 app store rating",
+        "70% daily active users"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Restaurant Booking Platform",
+      "category": "Web Design",
+      "client": "DineOut",
+      "description": "Elegant platform for discovering and booking restaurants with advanced search filters.",
+      "long_description": "Developed a sophisticated restaurant booking platform that makes discovering and reserving tables effortless.",
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+      "figma_link": "https://www.figma.com/file/example4",
+      "live_link": "https://example.com/project4",
+      "tags": ["Web", "Booking", "Restaurant", "Maps"],
+      "year": "2023",
+      "duration": "3 months",
+      "role": "UI/UX Designer",
+      "deliverables": [
+        "Information Architecture",
+        "Wireframes",
+        "Visual Design",
+        "Responsive Layouts"
+      ],
+      "results": [
+        "500+ restaurant partners",
+        "50K monthly bookings",
+        "4.6/5 user rating"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "John Smith",
+      "role": "CEO",
+      "company": "ShopEasy Inc.",
+      "text": "Outstanding design work that exceeded our expectations. The new app interface has significantly improved our conversion rates.",
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "rating": 5
+    },
+    {
+      "name": "Sarah Johnson",
+      "role": "Product Manager",
+      "company": "FinanceHub",
+      "text": "Working with this designer was a pleasure. Creative solutions to complex problems and beautiful, functional designs.",
+      "avatar": "https://i.pravatar.cc/150?img=45",
+      "rating": 5
+    }
+  ],
+  "experience": [
+    {
+      "title": "Senior UI/UX Designer",
+      "company": "Tech Innovations Inc.",
+      "location": "San Francisco, CA",
+      "period": "2022 - Present",
+      "description": "Leading design initiatives for multiple product lines and mentoring junior designers.",
+      "achievements": [
+        "Led redesign of flagship product",
+        "Established company-wide design system",
+        "Mentored 5 junior designers"
+      ]
+    },
+    {
+      "title": "UI/UX Designer",
+      "company": "Digital Creative Agency",
+      "location": "San Francisco, CA",
+      "period": "2020 - 2022",
+      "description": "Designed digital experiences for various clients across different industries.",
+      "achievements": [
+        "Completed 30+ client projects",
+        "Won 'Best Design Award'",
+        "95% client satisfaction rate"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Information Technology",
+      "school": "University of Cebu Main Campus",
+      "period": "2022 - 2026",
+      "description": "Focused on digital design, user experience, and visual communication."
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best Mobile App Design",
+      "organization": "Design Awards 2024",
+      "year": "2024",
+      "project": "FitLife App"
+    }
+  ],
+  "social_links": {
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "behance": "https://behance.net/yourprofile",
+    "dribbble": "https://dribbble.com/yourprofile",
+    "twitter": "https://twitter.com/yourprofile",
+    "instagram": "https://instagram.com/yourprofile",
+    "medium": "https://medium.com/@yourprofile"
+  },
+  "resume_url": "/static/files/Resume.pdf",
+  "availability": "Available for freelance work",
+  "timezone": "PST (UTC-8)",
+  "languages": ["English", "Spanish"],
+  "interests": ["Photography", "Hiking", "Reading"],
+  "statistics": {
+    "years_experience": 2,
+    "projects_completed": 50,
+    "happy_clients": 30,
+    "awards_won": 8
+  }
+}

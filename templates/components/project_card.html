@@ -1,0 +1,242 @@
+<!-- Project Card Component
+     Usage: {% include 'components/project_card.html' with project=project_data %}
+     This component displays a single project card with hover effects and animations
+-->
+
+<div class="project-card" 
+     data-category="{{ project.category }}" 
+     data-project-id="{{ project.id }}"
+     data-year="{{ project.year }}"
+     role="article"
+     aria-labelledby="project-title-{{ project.id }}">
+    
+    <!-- Project Image Section -->
+    <div class="project-image-wrapper">
+        <img src="{{ project.image }}" 
+             alt="{{ project.title }} - {{ project.description }}" 
+             class="project-image" 
+             loading="lazy"
+             width="800"
+             height="600">
+        
+        <!-- Hover Overlay with CTA -->
+        <div class="project-overlay" aria-hidden="true">
+            <div class="project-overlay-content">
+                <a href="{{ project.figma_link }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="project-overlay-link btn btn-primary"
+                   aria-label="View {{ project.title }} in Figma">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    View Project
+                </a>
+                
+                {% if project.live_link %}
+                <a href="{{ project.live_link }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="project-overlay-link btn btn-secondary"
+                   aria-label="View live site for {{ project.title }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    Live Site
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Category Badge -->
+        <div class="project-badge">
+            <span class="badge badge-category">{{ project.category }}</span>
+        </div>
+    </div>
+    
+    <!-- Project Content Section -->
+    <div class="project-content">
+        
+        <!-- Project Meta Information -->
+        <div class="project-meta">
+            <span class="project-category-text">{{ project.category }}</span>
+            {% if project.year %}
+            <span class="project-year">{{ project.year }}</span>
+            {% endif %}
+        </div>
+        
+        <!-- Project Title -->
+        <h3 class="project-title" id="project-title-{{ project.id }}">
+            {{ project.title }}
+        </h3>
+        
+        <!-- Client Information (if available) -->
+        {% if project.client %}
+        <p class="project-client">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>{{ project.client }}</span>
+        </p>
+        {% endif %}
+        
+        <!-- Project Description -->
+        <p class="project-description">
+            {{ project.description }}
+        </p>
+        
+        <!-- Extended Description (if available) -->
+        {% if project.long_description %}
+        <div class="project-long-description" style="display: none;">
+            <p>{{ project.long_description }}</p>
+        </div>
+        {% endif %}
+        
+        <!-- Project Tags -->
+        {% if project.tags %}
+        <div class="project-tags" role="list" aria-label="Project technologies and skills">
+            {% for tag in project.tags %}
+            <span class="tag" role="listitem">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Project Details Grid (if additional info available) -->
+        {% if project.role or project.duration or project.deliverables %}
+        <div class="project-details">
+            {% if project.role %}
+            <div class="project-detail-item">
+                <strong>Role:</strong>
+                <span>{{ project.role }}</span>
+            </div>
+            {% endif %}
+            
+            {% if project.duration %}
+            <div class="project-detail-item">
+                <strong>Duration:</strong>
+                <span>{{ project.duration }}</span>
+            </div>
+            {% endif %}
+            
+            {% if project.deliverables %}
+            <div class="project-detail-item project-deliverables">
+                <strong>Deliverables:</strong>
+                <ul class="deliverables-list">
+                    {% for deliverable in project.deliverables[:3] %}
+                    <li>{{ deliverable }}</li>
+                    {% endfor %}
+                    {% if project.deliverables|length > 3 %}
+                    <li>+{{ project.deliverables|length - 3 }} more</li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        <!-- Project Results/Achievements -->
+        {% if project.results %}
+        <div class="project-results">
+            <h4 class="results-title">Results:</h4>
+            <ul class="results-list">
+                {% for result in project.results[:3] %}
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{{ result }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        <!-- Project Actions -->
+        <div class="project-actions">
+            <a href="{{ project.figma_link }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="project-link"
+               aria-label="View {{ project.title }} design in Figma">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>View in Figma</span>
+            </a>
+            
+            {% if project.live_link %}
+            <a href="{{ project.live_link }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="project-link project-link-secondary"
+               aria-label="Visit live website for {{ project.title }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>Live Site</span>
+            </a>
+            {% endif %}
+            
+            {% if project.long_description %}
+            <button class="project-link project-link-more" 
+                    data-project-id="{{ project.id }}"
+                    aria-label="Read more about {{ project.title }}"
+                    aria-expanded="false">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span class="more-text">Read More</span>
+            </button>
+            {% endif %}
+        </div>
+        
+    </div>
+    
+    <!-- Loading State (optional, for dynamic loading) -->
+    <div class="project-loading" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+    
+</div>
+
+<!-- Optional: Add this JavaScript if you want "Read More" functionality -->
+<script>
+// Read More functionality (add to main.js or include inline)
+document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtns = document.querySelectorAll('.project-link-more');
+    
+    readMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project-id');
+            const projectCard = this.closest('.project-card');
+            const longDesc = projectCard.querySelector('.project-long-description');
+            const shortDesc = projectCard.querySelector('.project-description');
+            const moreText = this.querySelector('.more-text');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            if (longDesc) {
+                if (isExpanded) {
+                    longDesc.style.display = 'none';
+                    shortDesc.style.display = 'block';
+                    moreText.textContent = 'Read More';
+                    this.setAttribute('aria-expanded', 'false');
+                } else {
+                    longDesc.style.display = 'block';
+                    shortDesc.style.display = 'none';
+                    moreText.textContent = 'Read Less';
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            }
+        });
+    });
+});
+</script>

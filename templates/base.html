@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}{{ data.name }} - {{ data.title }}. Professional UI/UX Designer Portfolio showcasing creative design work and projects.{% endblock %}">
+    <meta name="keywords" content="UI/UX Designer, Portfolio, Figma, Web Design, Mobile Design, User Experience, {{ data.name }}">
+    <meta name="author" content="{{ data.name }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{% block og_title %}{{ data.name }} - {{ data.title }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ data.bio }}{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ request.url }}">
+    <meta name="twitter:title" content="{{ data.name }} - {{ data.title }}">
+    <meta name="twitter:description" content="{{ data.bio }}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
+    
+    <!-- Page Title -->
+    <title>{% block title %}{{ data.name }} - {{ data.title }} | Portfolio{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Additional CSS -->
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Schema.org JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ data.name }}",
+        "jobTitle": "{{ data.title }}",
+        "email": "{{ data.email }}",
+        "url": "{{ request.url_root }}",
+        "sameAs": [
+            {% if data.linkedin %}"https://{{ data.linkedin }}"{% endif %}{% if data.behance %},
+            "https://{{ data.behance }}"{% endif %}{% if data.dribbble %},
+            "https://{{ data.dribbble }}"{% endif %}
+        ]
+    }
+    </script>
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    
+    <!-- Skip to main content (Accessibility) -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
+    <!-- Header Navigation -->
+    {% include 'components/header.html' %}
+    
+    <!-- Main Content Area -->
+    <main id="main-content" role="main">
+        {% block content %}
+        <!-- Page content will be inserted here -->
+        {% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
+    
+    <!-- AI Chatbot Widget -->
+    <div id="chatbot-widget">
+        <button id="chatbot-toggle" aria-label="Open AI Assistant" aria-expanded="false">
+            💬
+        </button>
+        <div id="chatbot-container" role="dialog" aria-modal="true" aria-labelledby="chatbot-title">
+            <div class="chatbot-header">
+                <h3 id="chatbot-title">AI Assistant</h3>
+                <button id="chatbot-close" aria-label="Close chatbot" class="chatbot-close-btn">
+                    ✕
+                </button>
+            </div>
+            <div class="chatbot-body">
+                <!-- Replace YOUR_FLOWISE_CHATBOT_URL with your actual Flowise chatbot URL -->
+                <iframe 
+                    src="YOUR_FLOWISE_CHATBOT_URL" 
+                    title="AI Chatbot Assistant"
+                    class="chatbot-iframe"
+                    allow="microphone"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" aria-label="Scroll to top" class="scroll-top-btn" style="display: none;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+    
+    <!-- Flash Messages (for notifications) -->
+    {% set messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div id="flash-messages" class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}" role="alert">
+            <span>{{ message }}</span>
+            <button class="flash-close" aria-label="Close message">✕</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Additional JavaScript -->
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Utility Scripts -->
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            const currentYear = new Date().getFullYear();
+            document.querySelectorAll('.current-year').forEach(function(el) {
+                el.textContent = currentYear;
+            });
+            
+            // Scroll to top button functionality
+            const scrollTopBtn = document.getElementById('scroll-to-top');
+            if (scrollTopBtn) {
+                // Show/hide button based on scroll position
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        scrollTopBtn.style.display = 'flex';
+                    } else {
+                        scrollTopBtn.style.display = 'none';
+                    }
+                });
+                
+                // Scroll to top when clicked
+                scrollTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Flash messages auto-hide
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(msg) {
+                const closeBtn = msg.querySelector('.flash-close');
+                
+                // Auto-hide after 5 seconds
+                setTimeout(function() {
+                    msg.style.animation = 'slideOut 0.3s ease forwards';
+                    setTimeout(function() { 
+                        msg.remove(); 
+                    }, 300);
+                }, 5000);
+                
+                // Close button functionality
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        msg.style.animation = 'slideOut 0.3s ease forwards';
+                        setTimeout(function() { 
+                            msg.remove(); 
+                        }, 300);
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <!-- Google Analytics (Optional - Add your tracking ID) -->
+    {% block analytics %}
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+    -->
+    {% endblock %}
+    
+</body>
+</html>
