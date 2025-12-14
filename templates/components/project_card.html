@@ -1,16 +1,10 @@
-<!-- Project Card Component
-     Usage: {% include 'components/project_card.html' with project=project_data %}
-     This component displays a single project card with hover effects and animations
--->
-
 <div class="project-card" 
      data-category="{{ project.category }}" 
      data-project-id="{{ project.id }}"
      data-year="{{ project.year }}"
      role="article"
      aria-labelledby="project-title-{{ project.id }}">
-    
-    <!-- Project Image Section -->
+
     <div class="project-image-wrapper">
         <img src="{{ project.image }}" 
              alt="{{ project.title }} - {{ project.description }}" 
@@ -18,8 +12,7 @@
              loading="lazy"
              width="800"
              height="600">
-        
-        <!-- Hover Overlay with CTA -->
+ 
         <div class="project-overlay" aria-hidden="true">
             <div class="project-overlay-content">
                 <a href="{{ project.figma_link }}" 
@@ -51,30 +44,25 @@
                 {% endif %}
             </div>
         </div>
-        
-        <!-- Category Badge -->
+
         <div class="project-badge">
             <span class="badge badge-category">{{ project.category }}</span>
         </div>
     </div>
-    
-    <!-- Project Content Section -->
+
     <div class="project-content">
-        
-        <!-- Project Meta Information -->
+
         <div class="project-meta">
             <span class="project-category-text">{{ project.category }}</span>
             {% if project.year %}
             <span class="project-year">{{ project.year }}</span>
             {% endif %}
         </div>
-        
-        <!-- Project Title -->
+
         <h3 class="project-title" id="project-title-{{ project.id }}">
             {{ project.title }}
         </h3>
-        
-        <!-- Client Information (if available) -->
+  
         {% if project.client %}
         <p class="project-client">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -84,20 +72,17 @@
             <span>{{ project.client }}</span>
         </p>
         {% endif %}
-        
-        <!-- Project Description -->
+ 
         <p class="project-description">
             {{ project.description }}
         </p>
-        
-        <!-- Extended Description (if available) -->
+
         {% if project.long_description %}
         <div class="project-long-description" style="display: none;">
             <p>{{ project.long_description }}</p>
         </div>
         {% endif %}
-        
-        <!-- Project Tags -->
+
         {% if project.tags %}
         <div class="project-tags" role="list" aria-label="Project technologies and skills">
             {% for tag in project.tags %}
@@ -105,8 +90,7 @@
             {% endfor %}
         </div>
         {% endif %}
-        
-        <!-- Project Details Grid (if additional info available) -->
+ 
         {% if project.role or project.duration or project.deliverables %}
         <div class="project-details">
             {% if project.role %}
@@ -138,8 +122,7 @@
             {% endif %}
         </div>
         {% endif %}
-        
-        <!-- Project Results/Achievements -->
+
         {% if project.results %}
         <div class="project-results">
             <h4 class="results-title">Results:</h4>
@@ -155,8 +138,7 @@
             </ul>
         </div>
         {% endif %}
-        
-        <!-- Project Actions -->
+
         <div class="project-actions">
             <a href="{{ project.figma_link }}" 
                target="_blank" 
@@ -200,17 +182,13 @@
         </div>
         
     </div>
-    
-    <!-- Loading State (optional, for dynamic loading) -->
+
     <div class="project-loading" style="display: none;">
         <div class="loading-spinner"></div>
     </div>
     
 </div>
-
-<!-- Optional: Add this JavaScript if you want "Read More" functionality -->
 <script>
-// Read More functionality (add to main.js or include inline)
 document.addEventListener('DOMContentLoaded', function() {
     const readMoreBtns = document.querySelectorAll('.project-link-more');
     

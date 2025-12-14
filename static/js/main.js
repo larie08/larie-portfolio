@@ -1,23 +1,12 @@
-/**
- * UI/UX Portfolio - Main JavaScript
- * Handles all interactive functionality
- */
-
 (function() {
     'use strict';
 
-    // ============================================
-    // State Management
-    // ============================================
     const state = {
         currentFilter: 'all',
         chatbotOpen: false,
         mobileMenuOpen: false
     };
 
-    // ============================================
-    // DOM Ready
-    // ============================================
     document.addEventListener('DOMContentLoaded', function() {
         initNavigation();
         initProjectFilters();
@@ -27,11 +16,7 @@
         initMobileMenu();
     });
 
-    // ============================================
-    // Navigation
-    // ============================================
     function initNavigation() {
-        // Smooth scrolling for navigation links
         const navLinks = document.querySelectorAll('a[href^="#"]');
         
         navLinks.forEach(link => {
@@ -42,12 +27,10 @@
                 const targetSection = document.querySelector(targetId);
                 
                 if (targetSection) {
-                    // Close mobile menu if open
                     if (state.mobileMenuOpen) {
                         toggleMobileMenu();
                     }
                     
-                    // Calculate offset for fixed header
                     const headerHeight = document.querySelector('header').offsetHeight;
                     const targetPosition = targetSection.offsetTop - headerHeight;
                     
@@ -55,14 +38,12 @@
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                    
-                    // Update URL without jumping
+
                     history.pushState(null, null, targetId);
                 }
             });
         });
 
-        // Active navigation highlighting
         window.addEventListener('scroll', highlightActiveNav);
     }
 
@@ -90,17 +71,13 @@
         });
     }
 
-    // ============================================
-    // Mobile Menu
-    // ============================================
     function initMobileMenu() {
         const menuToggle = document.getElementById('mobile-menu-toggle');
         const mobileNav = document.getElementById('mobile-nav');
         
         if (menuToggle && mobileNav) {
             menuToggle.addEventListener('click', toggleMobileMenu);
-            
-            // Close menu when clicking outside
+ 
             document.addEventListener('click', function(e) {
                 if (state.mobileMenuOpen && 
                     !menuToggle.contains(e.target) && 
@@ -108,8 +85,7 @@
                     toggleMobileMenu();
                 }
             });
-            
-            // Close menu on ESC key
+
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && state.mobileMenuOpen) {
                     toggleMobileMenu();
@@ -126,14 +102,10 @@
         
         menuToggle.classList.toggle('active');
         mobileNav.classList.toggle('active');
-        
-        // Prevent body scroll when menu is open
+
         document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
     }
 
-    // ============================================
-    // Project Filtering
-    // ============================================
     function initProjectFilters() {
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
@@ -143,15 +115,12 @@
         filterBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const filter = this.getAttribute('data-filter');
-                
-                // Update active button
+
                 filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
-                // Update state
+
                 state.currentFilter = filter;
-                
-                // Filter projects with animation
+
                 filterProjects(filter, projectCards);
             });
         });
@@ -163,7 +132,6 @@
             const shouldShow = filter === 'all' || category === filter;
             
             if (shouldShow) {
-                // Show with staggered animation
                 setTimeout(() => {
                     card.style.display = 'block';
                     card.style.animation = 'fadeInUp 0.5s ease forwards';
@@ -175,9 +143,6 @@
         });
     }
 
-    // ============================================
-    // Chatbot
-    // ============================================
     function initChatbot() {
         const chatbotToggle = document.getElementById('chatbot-toggle');
         const chatbotContainer = document.getElementById('chatbot-container');
@@ -185,10 +150,8 @@
         
         if (!chatbotToggle || !chatbotContainer) return;
         
-        // Toggle chatbot
         chatbotToggle.addEventListener('click', toggleChatbot);
-        
-        // Close button
+
         if (chatbotClose) {
             chatbotClose.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -197,8 +160,7 @@
                 }
             });
         }
-        
-        // Close when clicking outside
+
         document.addEventListener('click', function(e) {
             if (state.chatbotOpen && 
                 !chatbotContainer.contains(e.target) && 
@@ -206,8 +168,7 @@
                 toggleChatbot();
             }
         });
-        
-        // Close on ESC key
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && state.chatbotOpen) {
                 toggleChatbot();
@@ -223,43 +184,35 @@
         
         chatbotContainer.classList.toggle('active');
         chatbotToggle.textContent = state.chatbotOpen ? '✕' : '💬';
-        
-        // Add animation
+
         if (state.chatbotOpen) {
             chatbotContainer.style.animation = 'fadeInUp 0.3s ease';
         }
     }
 
-    // ============================================
-    // Scroll Effects
-    // ============================================
     function initScrollEffects() {
         let lastScroll = 0;
         const header = document.querySelector('header');
         
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset;
-            
-            // Header hide/show on scroll
+
             if (currentScroll <= 0) {
                 header.classList.remove('scroll-up', 'scroll-down');
                 return;
             }
             
             if (currentScroll > lastScroll && currentScroll > 100) {
-                // Scrolling down
                 header.classList.remove('scroll-up');
                 header.classList.add('scroll-down');
             } else if (currentScroll < lastScroll) {
-                // Scrolling up
                 header.classList.remove('scroll-down');
                 header.classList.add('scroll-up');
             }
             
             lastScroll = currentScroll;
         });
-        
-        // Parallax effect for hero section
+
         const hero = document.querySelector('.hero');
         if (hero) {
             window.addEventListener('scroll', function() {
@@ -270,9 +223,6 @@
         }
     }
 
-    // ============================================
-    // Intersection Observer for Animations
-    // ============================================
     function initAnimations() {
         const observerOptions = {
             threshold: 0.1,
@@ -283,8 +233,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
-                    
-                    // Animate children with stagger
+    
                     const children = entry.target.querySelectorAll('.skill-card, .project-card, .contact-item');
                     children.forEach((child, index) => {
                         setTimeout(() => {
@@ -295,13 +244,11 @@
                 }
             });
         }, observerOptions);
-        
-        // Observe sections
+
         const sections = document.querySelectorAll('section');
         sections.forEach(section => {
             observer.observe(section);
-            
-            // Set initial state for animated elements
+
             const animatedChildren = section.querySelectorAll('.skill-card, .project-card, .contact-item');
             animatedChildren.forEach(child => {
                 child.style.opacity = '0';
@@ -311,9 +258,6 @@
         });
     }
 
-    // ============================================
-    // API Functions (for future use)
-    // ============================================
     async function loadProjects() {
         try {
             const response = await fetch('/api/projects');
@@ -361,9 +305,6 @@
         }
     }
 
-    // ============================================
-    // Utility Functions
-    // ============================================
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -387,9 +328,6 @@
         };
     }
 
-    // ============================================
-    // Export for potential module use
-    // ============================================
     window.portfolioApp = {
         loadProjects,
         loadProjectById,

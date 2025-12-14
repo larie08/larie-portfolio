@@ -1,15 +1,12 @@
-<!-- Header Component -->
 <header id="main-header" role="banner">
     <nav class="nav-container" role="navigation" aria-label="Main navigation">
-        
-        <!-- Logo / Brand -->
+ 
         <div class="logo">
             <a href="#home" aria-label="Go to homepage">
                 {{ data.name }}
             </a>
         </div>
-        
-        <!-- Desktop Navigation Links -->
+
         <ul class="nav-links" id="nav-links" role="menubar">
             <li role="none">
                 <a href="#home" class="nav-link" role="menuitem">
@@ -31,8 +28,7 @@
                     <span>Contact</span>
                 </a>
             </li>
-            
-            <!-- Resume Download Button (Optional) -->
+
             {% if data.resume_url %}
             <li role="none">
                 <a href="{{ data.resume_url }}" 
