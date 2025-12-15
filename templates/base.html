@@ -76,9 +76,8 @@
                 </button>
             </div>
             <div class="chatbot-body">
-                <!-- Replace YOUR_FLOWISE_CHATBOT_URL with your actual Flowise chatbot URL -->
                 <iframe 
-                    src="YOUR_FLOWISE_CHATBOT_URL" 
+                    src="http://localhost:3000/chatbot/346c2b98-ab4b-4f7f-ba44-157c65a266ed" 
                     title="AI Chatbot Assistant"
                     class="chatbot-iframe"
                     allow="microphone"
@@ -156,6 +155,118 @@
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotBody = document.querySelector('.chatbot-body');
+
+            // API Configuration
+            const API_URL = "https://flowise-chatbot-1.onrender.com/chatbot/985467d7-0866-47b7-a7a8-d063afdb7cd9";
+
+            const chatHTML = `
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-welcome">
+                        <div class="welcome-icon">👋</div>
+                        <h4>Hello! I'm Larie's AI assistant</h4>
+                        <p>Ask me anything about this portfolio, projects, or skills!</p>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off" />
+                    <button id="chat-send" aria-label="Send message">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            `;
+
+            chatbotBody.innerHTML = chatHTML;
+
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const chatSend = document.getElementById('chat-send');
+
+            chatbotToggle.addEventListener('click', function() {
+                const isOpen = chatbotContainer.style.display === 'flex';
+                chatbotContainer.style.display = isOpen ? 'none' : 'flex';
+                chatbotToggle.setAttribute('aria-expanded', !isOpen);
+                
+                if (!isOpen && chatMessages.children.length === 0) {
+                    addMessage('bot', 'Hi! I\'m Laries AI assistant. Ask me anything about this portfolio!');
+                }
+            });
+
+            chatbotClose.addEventListener('click', function() {
+                chatbotContainer.style.display = 'none';
+                chatbotToggle.setAttribute('aria-expanded', 'false');
+            });
+
+            function addMessage(sender, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender}-message`;
+                messageDiv.innerHTML = `
+                    <div class="message-content">${text}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                `;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            async function query(question) {
+                try {
+                    const response = await fetch(API_URL, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ question: question })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const result = await response.json();
+                    return result;
+                } catch (error) {
+                    console.error('Error:', error);
+                    return { text: 'Sorry, I encountered an error. Please try again.' };
+                }
+            }
+
+            async function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                addMessage('user', message);
+                chatInput.value = '';
+
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'chat-message bot-message typing';
+                typingDiv.innerHTML = '<div class="message-content">Typing...</div>';
+                typingDiv.id = 'typing-indicator';
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                const response = await query(message);
+  
+                document.getElementById('typing-indicator')?.remove();
+
+                const botText = response.text || response.answer || 'Sorry, I could not process that.';
+                addMessage('bot', botText);
+            }
+
+            chatSend.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
     </script>
     
     <!-- Google Analytics (Optional - Add your tracking ID) -->
@@ -171,5 +282,6 @@
     -->
     {% endblock %}
     
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
 </body>
 </html>
