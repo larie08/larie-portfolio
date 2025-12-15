@@ -2,8 +2,6 @@ from flask import Flask, render_template, jsonify, request
 import json
 import os
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 
@@ -51,37 +49,21 @@ def get_project(project_id):
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
-    """Handle contact form submissions and send email"""
+    """Handle contact form submissions (no email sending)"""
     data = request.get_json()
-    print(f"Inquiry form submitted: {data}")
 
-    # Gmail SMTP configuration
-    sender_email = "lariejanerubi@gmail.com"  # Replace with your Gmail
-    sender_password = "your_app_password"  # Use an App Password, not regular password
-    receiver_email = "your.email@gmail.com"
+    if not data:
+        return jsonify({
+            "status": "error",
+            "message": "No data received"
+        }), 400
 
-    # Create email
-    subject = f"New Inquiry from {data.get('name')}"
-    body = f"""
-    Name: {data.get('name')}
-    Email: {data.get('email')}
-    Message: {data.get('message')}
-    """
+    print("📩 Inquiry received:", data)
 
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
-
-    try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(sender_email, sender_password)
-            server.send_message(msg)
-        return jsonify({"status": "success", "message": "Message sent successfully!"})
-    except Exception as e:
-        print(e)
-        return jsonify({"status": "error", "message": "Failed to send message."}), 500
+    return jsonify({
+        "status": "success",
+        "message": "Your inquiry has been received. Thank you!"
+    }), 200
 
 @app.errorhandler(404)
 def not_found(error):

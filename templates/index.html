@@ -113,65 +113,28 @@
                 
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.31h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
                         </svg>
                     </div>
                     <div>
                         <h4>Facebook</h4>
-                        <a href="https://{{ data.facebook }}" target="_blank">Connect with me</a>
+                        <a href="{{ data.facebook }}" target="_blank">Connect with me</a>
                     </div>
                 </div>
 
+
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a4 4 0 0 0-4 4 4 4 0 0 0 4 4h4a4 4 0 0 0 0-8h-4z"/>
+                            <path d="M8 10a4 4 0 0 0 0 8h4v-8H8z"/>
+                            <circle cx="16" cy="14" r="4"/>
                         </svg>
                     </div>
                     <div>
                         <h4>Figma</h4>
-                        <a href="https://{{ data.figma }}" target="_blank">View my portfolio</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-cta">
-                <p class="contact-message">Ready to start a project?</p>
-                <!-- Button trigger -->
-                <button class="btn btn-primary btn-large" id="inquiryBtn">Send Me an Email</button>
-
-                <!-- Modal -->
-                <div id="inquiryModal" class="send-email-modal-overlay">
-                    <div class="send-email-modal">
-                        <div class="send-email-modal-header">
-                            Send an Inquiry
-                            <button id="closeModal" class="send-email-modal-close">&times;</button>
-                        </div>
-                        <div class="send-email-modal-body">
-                            <form id="inquiryForm">
-                                <div class="send-email-form-row">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" placeholder="Please enter your full name" required>
-                                </div>
-                                <div class="send-email-form-row">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" placeholder="juandelacruz@gmail.com" required>
-                                </div>
-                                <div class="send-email-form-row">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" id="message" placeholder="How can I help you?...." required></textarea>
-                                </div>
-                                <div class="send-email-modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="closeModalFooter">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Send</button>
-                                </div>
-                            </form>
-                        </div>
+                        <a href="{{ data.figma }}" target="_blank">View my portfolio</a>
                     </div>
                 </div>
             </div>
@@ -237,5 +200,27 @@
             }
         });
     });
+
+     import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+     Chatbot.init({
+        chatflowid: "YOUR_CHATFLOW_ID",
+        apiHost: "https://your-flowise-domain",
+        theme: {
+        button: {
+            backgroundColor: "#111827",
+            right: 20,
+            bottom: 20,
+            size: "medium",
+            iconColor: "white"
+        },
+        chatWindow: {
+            welcomeMessage: "Hi! I'm Larie's AI assistant. Ask me about my projects or skills 👋",
+            backgroundColor: "#ffffff",
+            height: 600,
+            width: 400,
+            fontSize: 14
+        }
+        }
+    })
 </script>
 {% endblock %}
