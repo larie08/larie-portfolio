@@ -1247,3 +1247,8 @@ footer {
         max-width: 220px;
     }
 }
+
+@media (max-width: 768px) {
+    .nav-links { display: none !important; }
+    .mobile-menu-toggle { display: flex !important; }
+}
