@@ -1,0 +1,6 @@
+app.py
+templates/
+static/
+requirements.txt
+venv/
+__pycache__/
