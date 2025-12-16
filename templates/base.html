@@ -76,14 +76,8 @@
                 </button>
             </div>
             <div class="chatbot-body">
-                <iframe 
-                    src="http://localhost:3000/chatbot/346c2b98-ab4b-4f7f-ba44-157c65a266ed" 
-                    title="AI Chatbot Assistant"
-                    class="chatbot-iframe"
-                    allow="microphone"
-                    loading="lazy">
-                </iframe>
-            </div>
+                <!-- Chat interface will be inserted here by JavaScript -->
+            </div>  
         </div>
     </div>
     <button id="scroll-to-top" aria-label="Scroll to top" class="scroll-top-btn" style="display: none;">
@@ -163,8 +157,8 @@
             const chatbotBody = document.querySelector('.chatbot-body');
 
             // API Configuration
-            const API_URL = "https://flowise-chatbot-1.onrender.com/api/v1/prediction/985467d7-0866-47b7-a7a8-d063afdb7cd9";
-
+            const API_URL = "https://flowise-chatbot-1.onrender.com/api/v1/prediction/807f4351-3086-4d39-b8c4-281243837b10";
+            
             const chatHTML = `
                 <div class="chat-messages" id="chat-messages">
                     <div class="chat-welcome">
