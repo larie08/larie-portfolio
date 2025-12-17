@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}{{ data.name }} - {{ data.title }} Portfolio{% endblock %}
+
+{% block content %}
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">{{ data.name }}</h1>
+            <div class="hero-subtitle">{{ data.title }}</div>
+            <p class="hero-bio">{{ data.bio }}</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <span>Scroll Down</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title">Skills & Expertise</h2>
+        <p class="section-subtitle">Tools and technologies I work with</p>
+        
+        <div class="skills-grid">
+            {% for skill in data.skills %}
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <h3>{{ skill }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">A selection of my recent design work</p>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="Mobile Design">Mobile</button>
+            <button class="filter-btn" data-filter="Web Design">Web</button>
+        </div>
+        
+        <div class="projects-grid">
+            {% for project in data.projects %}
+            <div class="project-card" data-category="{{ project.category }}">
+                <div class="project-image-wrapper">
+                    <img src="{{ project.image }}" alt="{{ project.title }}" class="project-image" loading="lazy">
+                    <div class="project-overlay">
+                        <a href="{{ project.figma_link }}" target="_blank" class="project-overlay-link">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">{{ project.category }}</span>
+                        {% if project.year %}
+                        <span class="project-year">{{ project.year }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+                    
+                    <div class="project-tags">
+                        {% for tag in project.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-subtitle">Have a project in mind? Let's discuss how I can help bring your vision to life.</p>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <a href="mailto:{{ data.email }}">{{ data.email }}</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>LinkedIn</h4>
+                        <a href="https://{{ data.linkedin }}" target="_blank">Connect with me</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Behance</h4>
+                        <a href="https://{{ data.behance }}" target="_blank">View my portfolio</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-cta">
+                <p class="contact-message">Ready to start a project?</p>
+                <a href="mailto:{{ data.email }}" class="btn btn-primary btn-large">Send Me an Email</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    async function query(data) {
+        const response = await fetch(
+            "https://cloud.flowiseai.com/api/v1/prediction/52fd251e-98c8-4450-b9b4-b2d9ebe58088",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+        const result = await response.json();
+        return result;
+    }
+
+    query({"question": "Hey, how are you?"}).then((response) => {
+        console.log(response);
+    });
+</script>
+{% endblock %}
